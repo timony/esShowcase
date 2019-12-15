@@ -16,3 +16,7 @@ spring:
     username: price_optimization
     url: jdbc:postgresql://localhost:5433/postgres
 
+axon:
+  serializer:
+    general: jackson
+
