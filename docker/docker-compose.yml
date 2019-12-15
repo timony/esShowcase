@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  axon-server:
+    image: axoniq/axonserver
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    networks:
+      - po-ec
+  price-optimization-es-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: price_optimization
+      POSTGRES_PASSWORD: price_optimization
+    ports:
+      - '5433:5432'
+    networks:
+      - po-ec
+networks:
+  po-ec:
+    name: "price-optimization-ec"
