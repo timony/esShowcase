@@ -1,4 +1,4 @@
-package com.vendavo.tmika.priceoptimizationes.dataload.web.request;
+package com.vendavo.tmika.priceoptimizationes.dataload.domain.web.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

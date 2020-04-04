@@ -5,7 +5,6 @@ import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.FinishDataL
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.AsyncRunningFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
-import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadStatus;
 import com.vendavo.tmika.priceoptimizationes.dataload.run.AsyncRunner;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -41,6 +40,7 @@ public class DataLoadSaga {
 
     @SagaEventHandler(associationProperty = "id")
     public void on(AsyncRunningFinishedEvent event) {
+        log.info("Data load {} finished with result {}", event.getId(), event.getResult());
         commandGateway.send(FinishDataLoadCommand.builder()
                 .id(event.getId())
                 .result(event.getResult())

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 @Component
 public class AsyncRunner {
@@ -20,7 +21,16 @@ public class AsyncRunner {
 
     public void runDataLoad(String id) {
         log.info("Running data load job id:{}", id);
-        CompletableFuture.supplyAsync(() -> {
+        CompletableFuture.supplyAsync(getDataLoadResultSupplier(id))
+                .thenAccept(result -> eventGateway.publish(AsyncRunningFinishedEvent.builder()
+                                .id(id)
+                                .result(result)
+                                .build())
+                );
+    }
+
+    private Supplier<DataLoadResult> getDataLoadResultSupplier(String id) {
+        return () -> {
             try {
                 Thread.sleep(5000);
                 log.info("Finished data load job id:{}", id);
@@ -29,12 +39,6 @@ public class AsyncRunner {
                 log.error("Failed data load job id:{}", id);
                 return DataLoadResult.FAIL;
             }
-        })
-                .thenAccept(result ->
-                        eventGateway.publish(AsyncRunningFinishedEvent.builder()
-                                .id(id)
-                                .result(result)
-                                .build())
-                );
+        };
     }
 }

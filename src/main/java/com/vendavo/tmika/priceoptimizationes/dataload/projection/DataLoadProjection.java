@@ -26,6 +26,7 @@ public class DataLoadProjection {
         DataLoad dataLoad = findOrCreate(event.getId());
         dataLoad.setFile(event.getFile());
         dataLoad.setRequestTime(time);
+        dataLoad.setStatus(event.getNewStatus());
         repository.save(dataLoad);
     }
 
