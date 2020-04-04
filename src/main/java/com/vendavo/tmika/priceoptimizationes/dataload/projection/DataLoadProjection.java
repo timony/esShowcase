@@ -1,6 +1,7 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.projection;
 
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStatusChangedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
@@ -25,6 +26,14 @@ public class DataLoadProjection {
         DataLoad dataLoad = findOrCreate(event.getId());
         dataLoad.setFile(event.getFile());
         dataLoad.setRequestTime(time);
+        repository.save(dataLoad);
+    }
+
+    @EventHandler
+    public void on(DataLoadStartedEvent event, @Timestamp Instant time) {
+        DataLoad dataLoad = findOrCreate(event.getId());
+        dataLoad.setStartTime(time);
+        dataLoad.setStatus(event.getNewStatus());
         repository.save(dataLoad);
     }
 

@@ -18,15 +18,15 @@ public class AsyncRunner {
     @Autowired
     private EventGateway eventGateway;
 
-    public void runDataLoad(String id, String dataFile) {
-        log.info("Running data load job id:{}, file:{}", id, dataFile);
+    public void runDataLoad(String id) {
+        log.info("Running data load job id:{}", id);
         CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(5000);
-                log.info("Finished data load job id:{}, file:{}", id, dataFile);
+                log.info("Finished data load job id:{}", id);
                 return DataLoadResult.SUCCESS;
-            } catch (InterruptedException e) {
-                log.error("Failed data load job id:{}, file:{}", id, dataFile);
+            } catch (Exception e) {
+                log.error("Failed data load job id:{}", id);
                 return DataLoadResult.FAIL;
             }
         })

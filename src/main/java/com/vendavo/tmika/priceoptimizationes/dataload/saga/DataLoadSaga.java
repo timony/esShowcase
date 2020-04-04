@@ -4,6 +4,7 @@ import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.ChangeDataL
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.FinishDataLoadCommand;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.AsyncRunningFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadStatus;
 import com.vendavo.tmika.priceoptimizationes.dataload.run.AsyncRunner;
@@ -29,13 +30,9 @@ public class DataLoadSaga {
 
     @SagaEventHandler(associationProperty = "id")
     @StartSaga
-    public void on(DataLoadUploadedEvent event) {
-        log.info("Data load saga {} starts with file {}", event.getId(), event.getFile());
-        commandGateway.send(ChangeDataLoadStatusCommand.builder()
-                .id(event.getId())
-                .newStatus(DataLoadStatus.PENDING)
-                .build());
-        runner.runDataLoad(event.getId(), event.getFile());
+    public void on(DataLoadStartedEvent event) {
+        log.info("Data load saga {} starts", event.getId());
+        runner.runDataLoad(event.getId());
         commandGateway.send(ChangeDataLoadStatusCommand.builder()
                 .id(event.getId())
                 .newStatus(DataLoadStatus.RUNNING)

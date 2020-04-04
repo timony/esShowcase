@@ -4,6 +4,7 @@ import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.ChangeDataL
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.FinishDataLoadCommand;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStatusChangedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import lombok.Data;
@@ -33,7 +34,11 @@ public class DataLoadAggregate {
     @CommandHandler
     public DataLoadAggregate(UploadDataLoadCommand cmd) {
         Assert.notNull(cmd.getFile(), "File cannot be null");
-        apply(DataLoadUploadedEvent.from(cmd));
+        apply(DataLoadUploadedEvent.from(cmd))
+                .andThenApply(() -> DataLoadStartedEvent.builder()
+                        .id(cmd.getId())
+                        .newStatus(DataLoadStatus.PENDING)
+                        .build());
     }
 
     @EventSourcingHandler
