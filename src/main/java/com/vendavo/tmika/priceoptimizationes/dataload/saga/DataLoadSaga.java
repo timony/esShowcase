@@ -1,6 +1,7 @@
-package com.vendavo.tmika.priceoptimizationes.load.saga;
+package com.vendavo.tmika.priceoptimizationes.dataload.saga;
 
-import com.vendavo.tmika.priceoptimizationes.load.domain.event.DataLoadRequestedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.StartDataLoadCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadRequestedEvent;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.StartSaga;
@@ -16,6 +17,8 @@ public class DataLoadSaga {
     @SagaEventHandler(associationProperty = "id")
     @StartSaga
     public void dataLoadRequested(DataLoadRequestedEvent event) {
-
+        commandGateway.send(StartDataLoadCommand.builder()
+                .id(event.getId())
+                .build());
     }
 }

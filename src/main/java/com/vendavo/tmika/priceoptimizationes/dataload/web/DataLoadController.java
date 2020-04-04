@@ -1,7 +1,7 @@
-package com.vendavo.tmika.priceoptimizationes.load.web;
+package com.vendavo.tmika.priceoptimizationes.dataload.web;
 
-import com.vendavo.tmika.priceoptimizationes.load.projection.model.DataLoad;
-import com.vendavo.tmika.priceoptimizationes.load.web.request.TriggerDataLoadRequest;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.web.request.TriggerDataLoadRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;

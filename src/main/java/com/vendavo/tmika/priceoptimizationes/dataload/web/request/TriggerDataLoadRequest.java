@@ -1,8 +1,7 @@
-package com.vendavo.tmika.priceoptimizationes.load.web.request;
+package com.vendavo.tmika.priceoptimizationes.dataload.web.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data

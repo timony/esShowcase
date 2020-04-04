@@ -1,7 +1,7 @@
-package com.vendavo.tmika.priceoptimizationes.load.projection.model;
+package com.vendavo.tmika.priceoptimizationes.dataload.projection.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.vendavo.tmika.priceoptimizationes.load.domain.model.DataLoadStatus;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

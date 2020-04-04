@@ -1,4 +1,4 @@
-package com.vendavo.tmika.priceoptimizationes.load.domain.command;
+package com.vendavo.tmika.priceoptimizationes.dataload.domain.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,12 +8,11 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class UploadDataLoadCommand {
+@AllArgsConstructor
+public class StartDataLoadCommand {
 
     @TargetAggregateIdentifier
     private String id;
 
-    private String file;
 }

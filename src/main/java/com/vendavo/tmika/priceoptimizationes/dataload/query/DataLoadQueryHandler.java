@@ -1,9 +1,9 @@
-package com.vendavo.tmika.priceoptimizationes.load.query;
+package com.vendavo.tmika.priceoptimizationes.dataload.query;
 
-import com.vendavo.tmika.priceoptimizationes.load.projection.model.DataLoad;
-import com.vendavo.tmika.priceoptimizationes.load.projection.repository.DataLoadRepository;
-import com.vendavo.tmika.priceoptimizationes.load.query.model.FindAllDataLoadsQuery;
-import com.vendavo.tmika.priceoptimizationes.load.query.model.FindByIdQuery;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.repository.DataLoadRepository;
+import com.vendavo.tmika.priceoptimizationes.dataload.query.model.FindAllDataLoadsQuery;
+import com.vendavo.tmika.priceoptimizationes.dataload.query.model.FindByIdQuery;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

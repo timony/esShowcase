@@ -1,9 +1,9 @@
-package com.vendavo.tmika.priceoptimizationes.load.web;
+package com.vendavo.tmika.priceoptimizationes.dataload.web;
 
-import com.vendavo.tmika.priceoptimizationes.load.domain.command.UploadDataLoadCommand;
-import com.vendavo.tmika.priceoptimizationes.load.projection.model.DataLoad;
-import com.vendavo.tmika.priceoptimizationes.load.query.model.FindAllDataLoadsQuery;
-import com.vendavo.tmika.priceoptimizationes.load.query.model.FindByIdQuery;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.query.model.FindAllDataLoadsQuery;
+import com.vendavo.tmika.priceoptimizationes.dataload.query.model.FindByIdQuery;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.common.IdentifierFactory;
 import org.axonframework.messaging.responsetypes.ResponseTypes;

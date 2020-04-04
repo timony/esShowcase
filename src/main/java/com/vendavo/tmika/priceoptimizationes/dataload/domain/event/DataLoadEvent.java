@@ -1,4 +1,4 @@
-package com.vendavo.tmika.priceoptimizationes.load.domain.event;
+package com.vendavo.tmika.priceoptimizationes.dataload.domain.event;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

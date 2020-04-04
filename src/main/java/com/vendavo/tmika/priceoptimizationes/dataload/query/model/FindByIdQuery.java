@@ -1,4 +1,4 @@
-package com.vendavo.tmika.priceoptimizationes.load.query.model;
+package com.vendavo.tmika.priceoptimizationes.dataload.query.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
