@@ -1,15 +1,18 @@
 package com.vendavo.tmika.priceoptimizationes.load.projection.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.vendavo.tmika.priceoptimizationes.projection.model.AuditModel;
+import com.vendavo.tmika.priceoptimizationes.load.domain.model.DataLoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
 
 @Entity
 @Table(name = "dataload")
@@ -18,10 +21,19 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonPropertyOrder({"id", "file"})
-public class DataLoad extends AuditModel {
+public class DataLoad {
 
     @Id
     private String id;
 
     private String file;
+
+    @Enumerated(EnumType.STRING)
+    private DataLoadStatus status;
+
+    private Instant requestTime;
+
+    private Instant startTime;
+
+    private Instant endTime;
 }
