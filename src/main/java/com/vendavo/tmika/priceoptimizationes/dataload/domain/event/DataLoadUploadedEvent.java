@@ -11,17 +11,15 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataLoadRequestedEvent extends DataLoadEvent {
+public class DataLoadUploadedEvent extends DataLoadStatusChangedEvent {
 
     private String file;
 
-    private DataLoadStatus status;
-
-    public static DataLoadRequestedEvent from(UploadDataLoadCommand cmd) {
-        return DataLoadRequestedEvent.builder()
+    public static DataLoadUploadedEvent from(UploadDataLoadCommand cmd) {
+        return DataLoadUploadedEvent.builder()
                 .id(cmd.getId())
                 .file(cmd.getFile())
-                .status(DataLoadStatus.NEW)
+                .newStatus(DataLoadStatus.NEW)
                 .build();
     }
 }

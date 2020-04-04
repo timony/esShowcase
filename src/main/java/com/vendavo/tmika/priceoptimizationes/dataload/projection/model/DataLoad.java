@@ -1,6 +1,7 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.projection.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadResult;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,4 +37,7 @@ public class DataLoad {
     private Instant startTime;
 
     private Instant endTime;
+
+    @Enumerated(EnumType.STRING)
+    private DataLoadResult result;
 }

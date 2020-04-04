@@ -1,9 +1,11 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.domain.model;
 
-import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.StartDataLoadCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.ChangeDataLoadStatusCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.FinishDataLoadCommand;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
-import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadRequestedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStatusChangedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
@@ -26,20 +28,24 @@ public class DataLoadAggregate {
 
     private DataLoadStatus status;
 
+    private DataLoadResult result;
+
     @CommandHandler
     public DataLoadAggregate(UploadDataLoadCommand cmd) {
         Assert.notNull(cmd.getFile(), "File cannot be null");
-        apply(DataLoadRequestedEvent.from(cmd))
-                .andThenApply(() -> DataLoadStatusChangedEvent.builder()
-                        .id(cmd.getId())
-                        .newStatus(DataLoadStatus.PENDING).build());
+        apply(DataLoadUploadedEvent.from(cmd));
     }
 
     @EventSourcingHandler
-    public void on(DataLoadRequestedEvent event) {
+    public void on(DataLoadUploadedEvent event) {
         this.id = event.getId();
         this.file = event.getFile();
-        this.status = event.getStatus();
+        this.status = event.getNewStatus();
+    }
+
+    @CommandHandler
+    public void handle(ChangeDataLoadStatusCommand cmd) {
+        apply(DataLoadStatusChangedEvent.from(cmd));
     }
 
     @EventSourcingHandler
@@ -48,10 +54,13 @@ public class DataLoadAggregate {
     }
 
     @CommandHandler
-    public void handle(StartDataLoadCommand cmd) {
-        apply(DataLoadStatusChangedEvent.builder()
-                .id(cmd.getId())
-                .newStatus(DataLoadStatus.RUNNING)
-                .build());
+    public void handle(FinishDataLoadCommand cmd) {
+        apply(DataLoadFinishedEvent.from(cmd));
+    }
+
+    @EventSourcingHandler
+    public void on(DataLoadFinishedEvent event) {
+        this.result = event.getResult();
+        this.status = event.getNewStatus();
     }
 }
