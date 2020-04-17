@@ -1,9 +1,6 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.projection.base.service;
 
 import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.model.DataLoad;
-import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.query.model.FindAllDataLoadsQuery;
-import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.query.model.FindByIdQuery;
-import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +15,11 @@ public class DataLoadQueryService {
     QueryGateway queryGateway;
 
     public CompletableFuture<List<DataLoad>> getAll() {
-        return queryGateway.query(new FindAllDataLoadsQuery(), ResponseTypes.multipleInstancesOf(DataLoad.class));
+        throw new UnsupportedOperationException();
     }
 
     public CompletableFuture<DataLoad> getById(String id) {
-        return queryGateway.query(new FindByIdQuery(id), DataLoad.class);
+        throw new UnsupportedOperationException();
     }
 
 }

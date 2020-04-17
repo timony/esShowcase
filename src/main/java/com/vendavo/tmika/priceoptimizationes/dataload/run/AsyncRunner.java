@@ -1,6 +1,5 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.run;
 
-import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.AsyncRunningFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadAggregate;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadResult;
 import org.axonframework.eventhandling.gateway.EventGateway;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @Component
@@ -28,15 +26,7 @@ public class AsyncRunner {
     private static final int max = 1000;
 
     public void runDataLoad(String id) {
-        DataLoadAggregate dataLoadById = getDataLoadById(id);
-        log.info("Running data load job id:{}, file: {}", id, dataLoadById.getFile());
-        CompletableFuture.supplyAsync(getDataLoadResultSupplier(id))
-                .thenAccept(result -> eventGateway.publish(AsyncRunningFinishedEvent.builder()
-                                .id(id)
-                                .result(result)
-                                .recordsLoaded((long)(Math.random() * ((max - min) + 1)) + min)
-                                .build())
-                );
+        log.info("Running data load job id:{}, file: {}", id, null);
     }
 
     private Supplier<DataLoadResult> getDataLoadResultSupplier(String id) {

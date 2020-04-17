@@ -1,8 +1,6 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.domain.web;
 
-import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.common.IdentifierFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +13,7 @@ public class DataLoadDomainService {
     CommandGateway commandGateway;
 
     public CompletableFuture<String> triggerNewDataLoad(String file) {
-        return commandGateway.send(UploadDataLoadCommand.builder()
-                .id(IdentifierFactory.getInstance().generateIdentifier())
-                .file(file)
-                .build());
+        throw new UnsupportedOperationException();
     }
 
 
