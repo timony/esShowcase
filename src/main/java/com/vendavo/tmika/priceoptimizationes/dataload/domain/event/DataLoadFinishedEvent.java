@@ -16,10 +16,13 @@ public class DataLoadFinishedEvent extends DataLoadStatusChangedEvent {
 
     private DataLoadResult result;
 
+    private Long recordsLoaded;
+
     public static DataLoadFinishedEvent from(FinishDataLoadCommand cmd) {
         return DataLoadFinishedEvent.builder()
                 .id(cmd.getId())
                 .result(cmd.getResult())
+                .recordsLoaded(cmd.getRecordsLoaded())
                 .newStatus(DataLoadStatus.FINISHED)
                 .build();
     }

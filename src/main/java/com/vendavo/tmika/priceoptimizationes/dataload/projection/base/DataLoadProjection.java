@@ -1,11 +1,11 @@
-package com.vendavo.tmika.priceoptimizationes.dataload.projection;
+package com.vendavo.tmika.priceoptimizationes.dataload.projection.base;
 
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadFinishedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStatusChangedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
-import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
-import com.vendavo.tmika.priceoptimizationes.dataload.projection.repository.DataLoadRepository;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.repository.DataLoadRepository;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventhandling.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;

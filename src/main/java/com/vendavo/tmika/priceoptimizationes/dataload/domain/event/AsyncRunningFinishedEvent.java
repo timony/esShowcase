@@ -13,4 +13,6 @@ import lombok.experimental.SuperBuilder;
 public class AsyncRunningFinishedEvent extends DataLoadEvent {
 
     private DataLoadResult result;
+
+    private Long recordsLoaded;
 }

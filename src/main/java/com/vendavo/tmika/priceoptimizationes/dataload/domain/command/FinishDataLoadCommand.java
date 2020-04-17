@@ -17,4 +17,6 @@ public class FinishDataLoadCommand {
     private String id;
 
     private DataLoadResult result;
+
+    private Long recordsLoaded;
 }

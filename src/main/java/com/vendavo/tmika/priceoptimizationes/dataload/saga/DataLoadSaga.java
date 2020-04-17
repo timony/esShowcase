@@ -50,6 +50,7 @@ public class DataLoadSaga {
         commandGateway.send(FinishDataLoadCommand.builder()
                 .id(event.getId())
                 .result(event.getResult())
+                .recordsLoaded(event.getRecordsLoaded())
                 .build());
     }
 

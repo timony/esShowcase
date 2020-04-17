@@ -24,6 +24,9 @@ public class AsyncRunner {
     @Autowired
     EventSourcingRepository<DataLoadAggregate> repository;
 
+    private static final int min = 500;
+    private static final int max = 1000;
+
     public void runDataLoad(String id) {
         DataLoadAggregate dataLoadById = getDataLoadById(id);
         log.info("Running data load job id:{}, file: {}", id, dataLoadById.getFile());
@@ -31,6 +34,7 @@ public class AsyncRunner {
                 .thenAccept(result -> eventGateway.publish(AsyncRunningFinishedEvent.builder()
                                 .id(id)
                                 .result(result)
+                                .recordsLoaded((long)(Math.random() * ((max - min) + 1)) + min)
                                 .build())
                 );
     }

@@ -31,6 +31,8 @@ public class DataLoadAggregate {
 
     private DataLoadResult result;
 
+    private long recordsLoaded;
+
     @CommandHandler
     public DataLoadAggregate(UploadDataLoadCommand cmd) {
         Assert.notNull(cmd.getFile(), "File cannot be null");

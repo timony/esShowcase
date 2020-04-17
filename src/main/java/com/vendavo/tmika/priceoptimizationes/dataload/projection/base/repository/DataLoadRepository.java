@@ -1,6 +1,6 @@
-package com.vendavo.tmika.priceoptimizationes.dataload.projection.repository;
+package com.vendavo.tmika.priceoptimizationes.dataload.projection.base.repository;
 
-import com.vendavo.tmika.priceoptimizationes.dataload.projection.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.model.DataLoad;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

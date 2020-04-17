@@ -1,4 +1,4 @@
-package com.vendavo.tmika.priceoptimizationes.dataload.projection.model;
+package com.vendavo.tmika.priceoptimizationes.dataload.projection.base.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.model.DataLoadResult;
