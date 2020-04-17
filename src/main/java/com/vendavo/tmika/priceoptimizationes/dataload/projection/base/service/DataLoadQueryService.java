@@ -15,11 +15,11 @@ public class DataLoadQueryService {
     QueryGateway queryGateway;
 
     public CompletableFuture<List<DataLoad>> getAll() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     public CompletableFuture<DataLoad> getById(String id) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
 }

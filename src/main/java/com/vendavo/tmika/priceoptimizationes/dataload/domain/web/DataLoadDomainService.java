@@ -13,7 +13,7 @@ public class DataLoadDomainService {
     CommandGateway commandGateway;
 
     public CompletableFuture<String> triggerNewDataLoad(String file) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
 
