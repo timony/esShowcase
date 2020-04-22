@@ -1,6 +1,7 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.projection.base.service;
 
 import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.model.DataLoad;
+import com.vendavo.tmika.priceoptimizationes.dataload.projection.base.query.model.FindByIdQuery;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DataLoadQueryService {
     }
 
     public CompletableFuture<DataLoad> getById(String id) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return queryGateway.query(new FindByIdQuery(id), DataLoad.class);
     }
 
 }
