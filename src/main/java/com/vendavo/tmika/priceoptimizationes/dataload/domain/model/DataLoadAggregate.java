@@ -1,9 +1,15 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.domain.model;
 
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
+
+import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 @Data
 @Aggregate
@@ -20,5 +26,17 @@ public class DataLoadAggregate {
     private DataLoadResult result;
 
     private long recordsLoaded;
+
+    @CommandHandler
+    public DataLoadAggregate(UploadDataLoadCommand cmd) {
+        apply(DataLoadUploadedEvent.from(cmd));
+    }
+
+    @EventSourcingHandler
+    public void on(DataLoadUploadedEvent event) {
+        this.id = event.getId();
+        this.file = event.getFile();
+        this.status = event.getNewStatus();
+    }
 
 }
