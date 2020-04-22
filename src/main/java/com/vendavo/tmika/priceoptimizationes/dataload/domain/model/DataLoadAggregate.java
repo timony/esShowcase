@@ -1,6 +1,8 @@
 package com.vendavo.tmika.priceoptimizationes.dataload.domain.model;
 
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.command.UploadDataLoadCommand;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStartedEvent;
+import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadStatusChangedEvent;
 import com.vendavo.tmika.priceoptimizationes.dataload.domain.event.DataLoadUploadedEvent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +31,11 @@ public class DataLoadAggregate {
 
     @CommandHandler
     public DataLoadAggregate(UploadDataLoadCommand cmd) {
-        apply(DataLoadUploadedEvent.from(cmd));
+        apply(DataLoadUploadedEvent.from(cmd))
+                .andThenApply(() -> DataLoadStartedEvent.builder()
+                        .id(cmd.getId())
+                        .newStatus(DataLoadStatus.PENDING)
+                        .build());
     }
 
     @EventSourcingHandler
@@ -39,4 +45,8 @@ public class DataLoadAggregate {
         this.status = event.getNewStatus();
     }
 
+    @EventSourcingHandler
+    public void on(DataLoadStatusChangedEvent event) {
+        this.status = event.getNewStatus();
+    }
 }
